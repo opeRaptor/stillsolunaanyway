@@ -67,6 +67,7 @@ try:
 
         #now = (int(sunset[0]) *10*60*60) + (int(sunset[1]) *60*60) + (int(sunset[3]) *10*60) + (int(sunset[4]) *60)
         now = rtc.now()
+        nowStr = str(now[3]) + ":" + str(now[4])
         now = int(now[3])*60*60 + int(now[4])*60
         
         print("now",now)
@@ -88,12 +89,19 @@ try:
 
         x = int((nowNight/nightLen) * 296)
         print("Moon pos:",x)
-        x = int(x - (110/2))
+        x = int(x - (90/2))
         print("Moon pos:",x)
 
         display.drawFill(0x000000) # Fill the screen with black
-        display.drawPng(x,8,"/lib/stillsolunaanyway/moon1.png")
-        print(display.pngInfo("/lib/stillsolunaanyway/moon1.png"))
+        display.drawPng(x,8,"/lib/stillsolunaanyway/moon.png")
+        print(display.pngInfo("/lib/stillsolunaanyway/moon.png"))
+        
+
+        display.drawText(0, 105, sunset, 0xFFFFFF, "Roboto_Regular18") 
+        display.drawText(140, 105, nowStr, 0xFFFFFF, "Roboto_Regular18") 
+        display.drawText(245, 105, sunrise, 0xFFFFFF, "Roboto_Regular18") 
+        
+        
         display.flush() # Write the contents of the buffer to the display
         badge.eink_busy_wait()
         
